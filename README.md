@@ -13,6 +13,7 @@ Daily will as minimum consists of:
 This is what I have published:
 
 * [daily-protocol](https://github.com/AndreasMadsen/daily-protocol): The protocol encoder and decoder for network communcation
+* [daily-storage](https://github.com/AndreasMadsen/daily-storage) - The LevelDB storage abstaction
 
 ##License
 
