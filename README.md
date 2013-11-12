@@ -10,9 +10,11 @@ Daily will as minimum consists of:
 * a server interface
 * a command line tool
 
-This is what I have published:
+You may not see much progress in the module right now, that is because I'm stil
+writing the submodules to it. This is what I have published:
 
-* [daily-protocol](https://github.com/AndreasMadsen/daily-protocol): The protocol encoder and decoder for network communcation
+* [daily-interface](https://github.com/AndreasMadsen/daily-interface) - The transport independent interface
+* [daily-protocol](https://github.com/AndreasMadsen/daily-protocol) - The protocol encoder and decoder for network communcation
 * [daily-storage](https://github.com/AndreasMadsen/daily-storage) - The LevelDB storage abstaction
 
 ##License
