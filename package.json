@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./daily.js",
+  "bin": "cli/index.js",
   "scripts": {
     "test": "tap test.js"
   },
@@ -19,14 +20,13 @@
     "sorting"
   ],
   "dependencies": {
-    "daily-interface": "0.2.x"
+    "async": "0.2.x",
+    "optimist": "0.6.x",
+    "complete": "0.4.x",
+    "daily-interface": "0.3.x"
   },
   "devDependencies": {
     "tap": "0.4.x"
   },
-  "license": "MIT",
-  "engines": {
-    "node": "0.10",
-    "npm": "1"
-  }
+  "license": "MIT"
 }
