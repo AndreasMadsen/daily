@@ -8,6 +8,11 @@
 npm install daily
 ```
 
+## Work In Progress
+
+The submodules have been developed and tested, only cli tool and tests for
+the high level interface is missing.
+
 ## Example
 
 **1. start a server**
@@ -39,10 +44,10 @@ logger.close();
 
 **3. read the logs**
 
-Read 1 hour (3600 seconds) intro the past.
+Read 1 hour (3600 seconds) intro the past, you can read more with `--past=number`.
 
 ```
-$ daily read --past=3600
+$ daily read
 ```
 
 ## Documentation
