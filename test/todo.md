@@ -20,9 +20,9 @@
 √ client once events
   √ client connect event
   √ client close event
-* server close
-  * will close active sockets as well
-  * can handle multiply sockets
+√ server close
+  √ will close active sockets as well
+  √ can handle multiply sockets
 * client close
   * implement: client reconnect
   * implement: buffer write when server is down
@@ -30,5 +30,5 @@
 * implement: cli
   * test server
   * test read
-* client connection arguments
-* server listen arguments
+√ client connection arguments
+√ server listen arguments

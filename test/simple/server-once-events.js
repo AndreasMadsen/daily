@@ -1,5 +1,4 @@
 
-var net = require('net');
 var path = require('path');
 var test = require('tap').test;
 var DailyServer = require('../../daily.js').Server;

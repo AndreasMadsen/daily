@@ -16,12 +16,12 @@ function ServerSetup() {
 }
 module.exports = ServerSetup;
 
-ServerSetup.prototype.open = function () {
+ServerSetup.prototype.open = function (port) {
   var self = this;
 
   test('open daily server', function (t) {
     self.server = new DailyServer(DB_PATH);
-    self.server.listen(0, '127.0.0.1', function () {
+    self.server.listen(port || 0, '127.0.0.1', function () {
       self.port = self.server.address().port;
       t.end();
     });
