@@ -30,3 +30,5 @@
 * implement: cli
   * test server
   * test read
+* client connection arguments
+* server listen arguments
