@@ -13,10 +13,10 @@
   √ write auto time
   √ write when option
   √ write when option and callback
-* simultaniuse write and read
-  * simultaniuse writes
-  * simultaniuse writes and read
-  * simultaniuse writes and multiply reads
+√ simultaniuse write and read
+  √ simultaniuse writes
+  √ simultaniuse writes and read
+  √ simultaniuse writes and multiply reads
 √ client once events
   √ client connect event
   √ client close event
