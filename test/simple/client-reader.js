@@ -141,7 +141,7 @@ test('read level 2 to 3', function (t) {
   );
 });
 
-test('read start -2.5h and end +0.5h and level 1 to 3', function (t) {
+test('read start -2.5h and end +0.5h and read 1 to 3', function (t) {
   var client = new DailyClient(setup.port, '127.0.0.1');
 
   client.reader(LOG_TIME - 2.5 * HOUR, LOG_TIME + 0.5 * HOUR, [1, 3]).pipe(
