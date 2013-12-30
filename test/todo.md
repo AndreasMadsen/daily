@@ -24,16 +24,17 @@
   √ will close active sockets as well
   √ can handle multiply sockets
 * write error handling
+  √ implement: error emitting
   * write error with callback
   * write error without callback
-* client close
-  * implement: client reconnect
-  * implement: buffer write when server is down
-  * client wait for buffer drain and writes
+√ client close
+  * implement: initial connection logic
+  √ implement: client reconnect
+  √ implement: buffer write when server is down
+  * tests
 * implement: cli
   * test server
   * test read
 √ client connection arguments
 √ server listen arguments
 √ finish README.md
-

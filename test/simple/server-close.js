@@ -8,7 +8,6 @@ var DailyClient = require('../../daily.js').Client;
 
 var DB_PATH = path.resolve(__dirname, '../temp.db');
 
-/*
 test('close all connections then server', function (t) {
   var server = new DailyServer(DB_PATH);
 
@@ -39,7 +38,18 @@ test('close all connections then server', function (t) {
     });
   });
 });
-*/
+
+function closeWithErrorCatch(socket, callback) {
+  var error = null;
+
+  socket.once('error', function (err) {
+    error = err;
+  });
+
+  socket.once('close', function () {
+    callback(null, error);
+  });
+}
 
 test('close server with active connections', function (t) {
   var server = new DailyServer(DB_PATH);
@@ -62,11 +72,13 @@ test('close server with active connections', function (t) {
 
       setTimeout(function() {
         async.parallel({
-          A: function (done) { clients.A.once('close', function () { console.log('A close'); done(); }); },
-          B: function (done) { clients.B.once('close', function () { console.log('B close'); done(); }); },
-          server: function (done) { server.close(function () { console.log('server close'); done(); }); }
-        }, function (err) {
+          A: function (done) { closeWithErrorCatch(clients.A, done); },
+          B: function (done) { closeWithErrorCatch(clients.B, done); },
+          server: function (done) { server.close(done); }
+        }, function (err, result) {
           t.equal(err, null);
+          t.equal(result.A.message, 'socket closed unintentionally and reconnection failed');
+          t.equal(result.B.message, 'socket closed unintentionally and reconnection failed');
           t.end();
         });
       }, 100);
