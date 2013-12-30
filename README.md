@@ -123,6 +123,9 @@ var reader = client.reader(Date.now() - 3600 * 1000, [1,4])
   .pipe(process.stdout);
 ```
 
+Please note that the `reader` object can emit an `error` event and supports the
+`close` event.
+
 #### client.close([callback])
 
 This will close the client. Under the hood this means both the TCP socket there
@@ -142,9 +145,16 @@ client.close(function () {
 
 #### client.on('connect')
 
+The client as made a connection.
+
 #### client.on('close')
 
+The client is completly closed.
+
 #### client.on('error')
+
+An error occurred, this can either be related to a TCP connection or a
+`client.log()` call there did not have a `callback`.
 
 ### server = new Server(where, [options])
 
