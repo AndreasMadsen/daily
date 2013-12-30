@@ -23,6 +23,9 @@
 √ server close
   √ will close active sockets as well
   √ can handle multiply sockets
+* write error handling
+  * write error with callback
+  * write error without callback
 * client close
   * implement: client reconnect
   * implement: buffer write when server is down
@@ -32,3 +35,5 @@
   * test read
 √ client connection arguments
 √ server listen arguments
+√ finish README.md
+
