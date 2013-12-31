@@ -16,6 +16,8 @@ function ServerSetup() {
 }
 module.exports = ServerSetup;
 
+ServerSetup.prototype.DB_PATH = DB_PATH;
+
 ServerSetup.prototype.open = function (port) {
   var self = this;
 

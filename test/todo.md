@@ -31,7 +31,12 @@
   √ implement: initial connection logic
   √ implement: client reconnect
   √ implement: buffer write when server is down
-  * tests
+  √ test initial connection
+  * test timeout duration
+  √ test log errors
+  √ test client errors
+  * test reconnection
+  * test close boolean
 * implement: cli
   * test server
   * test read
