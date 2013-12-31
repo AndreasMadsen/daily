@@ -23,12 +23,12 @@
 √ server close
   √ will close active sockets as well
   √ can handle multiply sockets
-* write error handling
+√ write error handling
   √ implement: error emitting
-  * write error with callback
-  * write error without callback
-√ client close
-  * implement: initial connection logic
+  √ write error with callback
+  √ write error without callback
+* client close
+  √ implement: initial connection logic
   √ implement: client reconnect
   √ implement: buffer write when server is down
   * tests
@@ -38,3 +38,4 @@
 √ client connection arguments
 √ server listen arguments
 √ finish README.md
+√ optional new keyword
