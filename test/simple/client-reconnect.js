@@ -20,7 +20,9 @@ test('failing initial connection', function (t) {
       t.equal(err, null);
       t.equal(logs[0].message, 'message - A');
 
-      client.close(function () {
+      client.close();
+      client.once('close', function (isError) {
+        t.equal(isError, false);
         server.close(t.end.bind(t));
       });
     }));
@@ -33,7 +35,59 @@ test('failing all connection attemps', function (t) {
     t.equal(err.message, 'socket closed, this log did not get saved');
     client.once('error', function (err) {
       t.equal(err.message, 'socket closed unintentionally and reconnection failed');
-      t.end();
+      client.once('close', function (isError) {
+        t.equal(isError, true);
+        t.end();
+      });
+    });
+  });
+});
+
+test('client can make a reconnection', function (t) {
+  var serverA = new DailyServer(setup.DB_PATH);
+      serverA.listen(10200, '127.0.0.1');
+
+  var client = new DailyClient(10200, '127.0.0.1');
+  client.log(1, 'message - C', function () {
+    serverA.close(function () {
+      var serverB = new DailyServer(setup.DB_PATH);
+          serverB.listen(10200, '127.0.0.1');
+
+      client.log(1, 'message - D', function () {
+        client.reader().pipe(endpoint({ objectMode: true }, function (err, logs) {
+          t.equal(err, null);
+          t.equal(logs[0].message, 'message - D');
+          t.equal(logs[1].message, 'message - C');
+
+          client.close();
+          client.once('close', function (isError) {
+            t.equal(isError, false);
+            serverB.close(t.end.bind(t));
+          });
+        }));
+      });
+    });
+  });
+});
+
+test('client failling all reconnection attempts', function (t) {
+  var serverA = new DailyServer(setup.DB_PATH);
+      serverA.listen(10200, '127.0.0.1');
+
+  var client = new DailyClient(10200, '127.0.0.1');
+  client.log(1, 'message - E', function (err) {
+    t.equal(err, null);
+    serverA.close(function () {
+      client.log(1, 'message - F', function (err) {
+        t.equal(err.message, 'socket closed, this log did not get saved');
+        client.once('error', function (err) {
+          t.equal(err.message, 'socket closed unintentionally and reconnection failed');
+          client.once('close', function (isError) {
+            t.equal(isError, true);
+            t.end();
+          });
+        });
+      });
     });
   });
 });

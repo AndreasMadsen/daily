@@ -27,16 +27,15 @@
   √ implement: error emitting
   √ write error with callback
   √ write error without callback
-* client close
+√ client close
   √ implement: initial connection logic
   √ implement: client reconnect
   √ implement: buffer write when server is down
   √ test initial connection
-  * test timeout duration
   √ test log errors
   √ test client errors
-  * test reconnection
-  * test close boolean
+  √ test reconnection
+  √ test close boolean
 * implement: cli
   * test server
   * test read
