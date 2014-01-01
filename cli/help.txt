@@ -3,14 +3,15 @@ daily command [options]
  help    prints this message
 
  read    connects to server and read some log entries          : defaults
-         -s --start=timestamp   read starts at this time       : 0
-         -e --end=timestamp     read stops at this time        : now
-         -l --levels=start,end  range of log levels to read    : 1,9
-         -p --past=seconds      special case, read some        : 3600
+         -s --start timestamp   read starts at this time       : 0
+         -e --end timestamp     read stops at this time        : now
+         -l --levels start,end  range of log levels to read    : 1,9
+         -p --past seconds      special case, read some        : 3600
                                 seconds intro the past When no
                                 options is set, -b is used.
-         -a --address=ip:port   client will connect to         : 127.0.0.1:10200
+         -c --colors            colors will always be used     : true
+         -a --address ip:port   client will connect to         : 127.0.0.1:10200
 
  server  start a daily server                                  : defaults
-         -d --database=path     filepath to the log database   : ./daily.db
-         -a --address=ip:port   server will listen to          : 0.0.0.0:10200
+         -d --database path     filepath to the log database   : ./daily.db
+         -a --address ip:port   server will listen to          : 0.0.0.0:10200

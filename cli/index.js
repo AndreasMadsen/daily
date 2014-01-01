@@ -26,15 +26,22 @@ var argv = optimist
     alias : 'past',
     default : 3600
   })
+  .options('c', {
+    alias : 'colors',
+    type : 'boolean'
+  })
   .options('a', {
     alias : 'address',
     default : 'auto:10200'
   })
   .options('d', {
     alias : 'database',
-    default : path.resolve('./daily.db')
+    default : './daily.db'
   })
   .argv;
+
+// Resolve database path
+argv.d = argv.database = path.resolve(argv.database);
 
 // Handle address default, depending on type
 if (argv.address.slice(0, 5) === 'auto:') {
@@ -66,6 +73,12 @@ var checks = {
   'past': function (val) {
     if (Number(val) !== val || isNaN(Number(val)) === true) {
       return '--past must be an integer';
+    }
+    return true;
+  },
+  'colors': function (val) {
+    if (typeof val !== 'boolean') {
+      return '--colors must be an boolean';
     }
     return true;
   },

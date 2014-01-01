@@ -23,6 +23,7 @@
     "async": "0.2.x",
     "optimist": "0.6.x",
     "complete": "0.4.x",
+    "cli-color": "0.2.x",
     "daily-storage": "0.4.x",
     "daily-interface": "0.4.x"
   },

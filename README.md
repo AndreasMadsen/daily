@@ -42,7 +42,7 @@ client.close();
 
 **3. read the logs**
 
-Read 1 hour (3600 seconds) intro the past, you can read more with `--past=number`.
+Read logs over the last one hour (3600 seconds), you can read more with `--past seconds`.
 
 ```
 $ daily read
@@ -58,17 +58,18 @@ daily command [options]
  help    prints this message
 
  read    connects to server and read some log entries          : defaults
-         -s --start=timestamp   read starts at this time       : 0
-         -e --end=timestamp     read stops at this time        : now
-         -l --levels=start,end  range of log levels to read    : 1,9
-         -p --past=seconds      special case, read some        : 3600
+         -s --start timestamp   read starts at this time       : 0
+         -e --end timestamp     read stops at this time        : now
+         -l --levels start,end  range of log levels to read    : 1,9
+         -p --past seconds      special case, read some        : 3600
                                 seconds intro the past When no
                                 options is set, -b is used.
-         -a --address=ip:port   client will connect to         : 127.0.0.1:10200
+         -c --colors            colors will always be used     : true
+         -a --address ip:port   client will connect to         : 127.0.0.1:10200
 
  server  start a daily server                                  : defaults
-         -d --database=path     filepath to the log database   : ./daily.db
-         -a --address=ip:port   server will listen to          : 0.0.0.0:10200
+         -d --database path     filepath to the log database   : ./daily.db
+         -a --address ip:port   server will listen to          : 0.0.0.0:10200
 ```
 
 ### client = new Client([port=10200], [address='127.0.0.1'], [callback])
