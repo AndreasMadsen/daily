@@ -56,6 +56,6 @@ FormatStream.prototype._transform = function (log, encoding, done) {
     message = util.inspect(log.message, { colors: false, death: null });
   }
 
-  this.push(time + '   ' + level + '   ' + message + '\n');
+  this.push(time + '   ' + level + '\n' + message + '\n');
   done(null);
 };
