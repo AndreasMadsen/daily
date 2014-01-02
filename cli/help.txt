@@ -15,3 +15,11 @@ daily command [options]
  server  start a daily server                                  : defaults
          -d --database path     filepath to the log database   : ./daily.db
          -a --address ip:port   server will listen to          : 0.0.0.0:10200
+
+read examples
+  daily read --start 0          read all messages in the database
+  daily read -c | less -R       make search and walkable in color
+  daily read --levels 1,1       read only level 1 logs
+
+server examples
+  daily server -a 0.0.0.0:0     start server on a random port

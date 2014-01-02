@@ -6,7 +6,7 @@ var util = require('util');
 
 function toTime(input) {
   if (input === null) return null;
-  else return parseInt(input, 10);
+  else return parseInt(input, 10) * 1000;
 }
 
 module.exports = function (argv) {
@@ -15,11 +15,11 @@ module.exports = function (argv) {
 
   var start = toTime(argv.start), end = toTime(argv.end);
   var levels = argv.levels.split(',').map(Number);
-  var past = toTime(argv.past);
+  var past = parseInt(argv.past, 10);
 
-  // If both start and end isn't set thne use past
+  // If both start and end isn't set then use past
   if (start === null && end === null) {
-    start = Math.floor(Date.now() / 1000) - past;
+    start = (Math.floor(Date.now() / 1000) - past) * 1000;
   }
 
   var client = new daily.Client(port, ip);
