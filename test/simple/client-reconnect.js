@@ -1,5 +1,6 @@
 
 var test = require('tap').test;
+var async = require('async');
 var endpoint = require('endpoint');
 
 var setup = require('../setup.js')(); /* will simply remove the database */
@@ -53,7 +54,16 @@ test('client can make a reconnection', function (t) {
       var serverB = new DailyServer(setup.DB_PATH);
           serverB.listen(10200, '127.0.0.1');
 
-      client.log(1, 'message - D', function () {
+      async.parallel([
+        function (done) {
+          client.log(1, 'message - D', done);
+        },
+        function (done) {
+          client.once('reconnect', done);
+        }
+      ], function (err) {
+        t.equal(err, null);
+
         client.reader().pipe(endpoint({ objectMode: true }, function (err, logs) {
           t.equal(err, null);
           t.equal(logs[0].message, 'message - D');

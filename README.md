@@ -151,6 +151,11 @@ client.close(function () {
 
 The client as made a connection.
 
+#### client.on('reconnect')
+
+When the client breaks the connection and makes a successful reconnection
+this event is emitted.
+
 #### client.on('close')
 
 The client is completly closed.
