@@ -8,11 +8,6 @@
 npm install daily
 ```
 
-## Work In Progress
-
-The submodules have been developed and tested, only cli tool and tests for
-the high level interface is missing.
-
 ## Example
 
 **1. start a server**
