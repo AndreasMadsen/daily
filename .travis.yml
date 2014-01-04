@@ -1,3 +1,4 @@
 language: node_js
+env: DAILY_PORT=10305
 node_js:
   - "0.10"
