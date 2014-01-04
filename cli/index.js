@@ -6,6 +6,8 @@ var optimist = require('optimist');
 
 var HELP_TEXT = fs.readFileSync(path.resolve(__dirname, './help.txt'), 'utf8');
 
+var DEFAULT_PORT = parseInt(process.env.DAILY_PORT, 10) || 10200;
+
 //
 // Parse options
 //
@@ -32,7 +34,7 @@ var argv = optimist
   })
   .options('a', {
     alias : 'address',
-    default : 'auto:10200'
+    default : 'auto:' + DEFAULT_PORT
   })
   .options('d', {
     alias : 'database',

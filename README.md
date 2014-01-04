@@ -75,6 +75,15 @@ server examples
   daily server -a 0.0.0.0:0     start server on a random port
 ```
 
+### Default port
+
+By default the port that daily use is `10200` you can always specify it by
+an argument or option but you can also set it using the `DAILY_PORT` environment.
+
+```shell
+export DAILY_PORT=5010
+```
+
 ### client = new Client([port=10200], [address='127.0.0.1'], [callback])
 
 Creates a client instance, the `new` keyword can be opmitted.

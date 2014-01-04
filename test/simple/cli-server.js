@@ -9,6 +9,8 @@ var exec = require('../exec.js');
 var setup = require('../setup.js')();
 var DailyClient = require('../../daily.js').Client;
 
+var DEFAULT_PORT = require('../default-port.js');
+
 setup.open();
 
 var LOG_TIME = Date.now();
@@ -38,13 +40,13 @@ test('run cli server (long), database set, no address', function (t) {
   var child = exec('{node} {daily} server --database ./temp.db/');
   child.stdout.pipe(endpoint(function (err, output) {
     t.equal(output.toString(),
-      'daily server ready on 0.0.0.0:10200\n' +
+      'daily server ready on 0.0.0.0:' + DEFAULT_PORT + '\n' +
       'data will be stored at ' + path.resolve(__dirname, '../temp.db') + '\n'
     );
     t.end();
   }));
 
-  var client = new DailyClient(10200, '127.0.0.1', function () {
+  var client = new DailyClient(DEFAULT_PORT, '127.0.0.1', function () {
     client.reader().pipe(endpoint({ objectMode: true }, function (err, logs) {
       t.equal(err, null);
       t.deepEqual(logs, writes);
@@ -59,13 +61,13 @@ test('run cli server (short), database set, no address', function (t) {
   var child = exec('{node} {daily} server -d ./temp.db/');
   child.stdout.pipe(endpoint(function (err, output) {
     t.equal(output.toString(),
-      'daily server ready on 0.0.0.0:10200\n' +
+      'daily server ready on 0.0.0.0:' + DEFAULT_PORT + '\n' +
       'data will be stored at ' + path.resolve(__dirname, '../temp.db') + '\n'
     );
     t.end();
   }));
 
-  var client = new DailyClient(10200, '127.0.0.1', function () {
+  var client = new DailyClient(DEFAULT_PORT, '127.0.0.1', function () {
     client.reader().pipe(endpoint({ objectMode: true }, function (err, logs) {
       t.equal(err, null);
       t.deepEqual(logs, writes);
@@ -80,7 +82,7 @@ test('run cli server (short), no database, no address', function (t) {
   var child = exec('{node} {daily} server');
   child.stdout.pipe(endpoint(function (err, output) {
     t.equal(output.toString(),
-      'daily server ready on 0.0.0.0:10200\n' +
+      'daily server ready on 0.0.0.0:' + DEFAULT_PORT + '\n' +
       'data will be stored at ' + path.resolve(__dirname, '../daily.db') + '\n'
     );
     wrench.rmdirRecursive(path.resolve(__dirname, '../daily.db'), function () {

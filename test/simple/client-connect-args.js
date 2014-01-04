@@ -4,7 +4,9 @@ var test = require('tap').test;
 var setup = require('../setup.js')();
 var DailyClient = require('../../daily.js').Client;
 
-setup.open(10200);
+var DEFAULT_PORT = require('../default-port.js');
+
+setup.open(DEFAULT_PORT);
 
 test('no port, no address, no callback', function (t) {
   var client = new DailyClient();

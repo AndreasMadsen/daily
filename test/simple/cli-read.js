@@ -8,6 +8,8 @@ var exec = require('../exec.js');
 var setup = require('../setup.js')();
 var DailyClient = require('../../daily.js').Client;
 
+var DEFAULT_PORT = require('../default-port.js');
+
 setup.open();
 
 var LOG_TIME = Math.floor(Date.now() / 1000);
@@ -79,7 +81,7 @@ test('run cli read (short) no time, some color, address set', function (t) {
 });
 
 setup.close();
-setup.open(10200);
+setup.open(DEFAULT_PORT);
 
 test('run cli read no time, no color, no address', function (t) {
   var child = exec('{node} {daily} read');

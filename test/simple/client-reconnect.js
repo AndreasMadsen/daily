@@ -7,13 +7,15 @@ var setup = require('../setup.js')(); /* will simply remove the database */
 var DailyServer = require('../../daily.js').Server;
 var DailyClient = require('../../daily.js').Client;
 
+var DEFAULT_PORT = require('../default-port.js');
+
 test('failing initial connection', function (t) {
   var server = new DailyServer(setup.DB_PATH);
-  var client = new DailyClient(10200, '127.0.0.1');
+  var client = new DailyClient(DEFAULT_PORT, '127.0.0.1');
       client.log(1, 'message - A');
 
   setTimeout(function () {
-    server.listen(10200, '127.0.0.1');
+    server.listen(DEFAULT_PORT, '127.0.0.1');
   }, 900);
 
   client.once('connect', function (socket) {
@@ -31,7 +33,7 @@ test('failing initial connection', function (t) {
 });
 
 test('failing all connection attemps', function (t) {
-  var client = new DailyClient(10200, '127.0.0.1');
+  var client = new DailyClient(DEFAULT_PORT, '127.0.0.1');
   client.log(1, 'message - B', function (err) {
     t.equal(err.message, 'socket closed, this log did not get saved');
     client.once('error', function (err) {
@@ -46,13 +48,13 @@ test('failing all connection attemps', function (t) {
 
 test('client can make a reconnection', function (t) {
   var serverA = new DailyServer(setup.DB_PATH);
-      serverA.listen(10200, '127.0.0.1');
+      serverA.listen(DEFAULT_PORT, '127.0.0.1');
 
-  var client = new DailyClient(10200, '127.0.0.1');
+  var client = new DailyClient(DEFAULT_PORT, '127.0.0.1');
   client.log(1, 'message - C', function () {
     serverA.close(function () {
       var serverB = new DailyServer(setup.DB_PATH);
-          serverB.listen(10200, '127.0.0.1');
+          serverB.listen(DEFAULT_PORT, '127.0.0.1');
 
       async.parallel([
         function (done) {
@@ -82,9 +84,9 @@ test('client can make a reconnection', function (t) {
 
 test('client failling all reconnection attempts', function (t) {
   var serverA = new DailyServer(setup.DB_PATH);
-      serverA.listen(10200, '127.0.0.1');
+      serverA.listen(DEFAULT_PORT, '127.0.0.1');
 
-  var client = new DailyClient(10200, '127.0.0.1');
+  var client = new DailyClient(DEFAULT_PORT, '127.0.0.1');
   client.log(1, 'message - E', function (err) {
     t.equal(err, null);
     serverA.close(function () {
