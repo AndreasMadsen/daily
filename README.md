@@ -1,4 +1,4 @@
-#daily
+#daily [![Build Status](https://secure.travis-ci.org/AndreasMadsen/daily.png)](http://travis-ci.org/AndreasMadsen/daily)
 
 > daily - A LevelDB based logging system
 
