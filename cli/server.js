@@ -8,7 +8,19 @@ module.exports = function (argv) {
   var server = new daily.Server(argv.database);
       server.listen(port, ip, function () {
         var addr = server.address();
-        console.log('daily server ready on ' + addr.address + ':' + addr.port);
-        console.log('data will be stored at ' + argv.database);
+        console.log('daily server ready');
+        console.log('  address  : ' + addr.address + ':' + addr.port);
+        console.log('  pid      : ' + process.pid);
+        console.log('  database : ' + argv.database);
       });
+
+  process.on('SIGTERM', closeServer.bind(null, 'SIGTERM'));
+  process.on('SIGINT', closeServer.bind(null, 'SIGINT'));
+
+  function closeServer(signal) {
+    console.log('got ' + signal + ' closeing daily server now');
+    server.close(function () {
+      console.log('daily server closed');
+    });
+  }
 };
