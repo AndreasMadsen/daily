@@ -19,16 +19,20 @@ test('failing initial connection', function (t) {
   }, 900);
 
   client.once('connect', function (socket) {
-    client.reader().pipe(endpoint({ objectMode: true }, function (err, logs) {
-      t.equal(err, null);
-      t.equal(logs[0].message, 'message - A');
+    // Allow time for client.log to finish
+    setTimeout(function () {
 
-      client.close();
-      client.once('close', function (isError) {
-        t.equal(isError, false);
-        server.close(t.end.bind(t));
-      });
-    }));
+      client.reader().pipe(endpoint({ objectMode: true }, function (err, logs) {
+        t.equal(err, null);
+        t.equal(logs[0].message, 'message - A');
+
+        client.close();
+        client.once('close', function (isError) {
+          t.equal(isError, false);
+          server.close(t.end.bind(t));
+        });
+      }));
+    }, 10);
   });
 });
 
