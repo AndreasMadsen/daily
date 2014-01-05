@@ -19,8 +19,6 @@ module.exports = function (argv) {
 
   function closeServer(signal) {
     console.log('got ' + signal + ' closeing daily server now');
-    server.close(function () {
-      console.log('daily server closed');
-    });
+    server.close();
   }
 };

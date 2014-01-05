@@ -44,8 +44,7 @@ test('run cli server (long), database set, no address', function (t) {
       '  address  : 0.0.0.0:' + DEFAULT_PORT + '\n' +
       '  pid      : ' + child.pid + '\n' +
       '  database : ' + path.resolve(__dirname, '../temp.db') + '\n' +
-      'got SIGINT closeing daily server now\n' +
-      'daily server closed\n'
+      'got SIGINT closeing daily server now\n'
     );
     t.end();
   }));
@@ -69,8 +68,7 @@ test('run cli server (short), database set, no address', function (t) {
       '  address  : 0.0.0.0:' + DEFAULT_PORT + '\n' +
       '  pid      : ' + child.pid + '\n' +
       '  database : ' + path.resolve(__dirname, '../temp.db') + '\n' +
-      'got SIGINT closeing daily server now\n' +
-      'daily server closed\n'
+      'got SIGINT closeing daily server now\n'
     );
     t.end();
   }));
@@ -94,8 +92,7 @@ test('run cli server (short), no database, no address', function (t) {
       '  address  : 0.0.0.0:' + DEFAULT_PORT + '\n' +
       '  pid      : ' + child.pid + '\n' +
       '  database : ' + path.resolve(__dirname, '../daily.db') + '\n' +
-      'got SIGINT closeing daily server now\n' +
-      'daily server closed\n'
+      'got SIGINT closeing daily server now\n'
     );
     wrench.rmdirRecursive(path.resolve(__dirname, '../daily.db'), function () {
       t.end();
@@ -115,8 +112,7 @@ test('run cli server (long), database set, address set', function (t) {
       '  address  : 127.0.0.1:10207\n' +
       '  pid      : ' + child.pid + '\n' +
       '  database : ' + path.resolve(__dirname, '../temp.db') + '\n' +
-      'got SIGINT closeing daily server now\n' +
-      'daily server closed\n'
+      'got SIGINT closeing daily server now\n'
     );
     t.end();
   }));
@@ -140,8 +136,7 @@ test('run cli server (short), database set, no address', function (t) {
       '  address  : 127.0.0.1:10207\n' +
       '  pid      : ' + child.pid + '\n' +
       '  database : ' + path.resolve(__dirname, '../temp.db') + '\n' +
-      'got SIGINT closeing daily server now\n' +
-      'daily server closed\n'
+      'got SIGINT closeing daily server now\n'
     );
     t.end();
   }));
