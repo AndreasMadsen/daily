@@ -1,7 +1,7 @@
 {
   "name": "daily",
   "description": "daily - A LevelDB based logging system",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./daily.js",
   "bin": "cli/index.js",
