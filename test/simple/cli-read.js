@@ -1,5 +1,4 @@
 
-var util = require('util');
 var test = require('tap').test;
 var async = require('async');
 var endpoint = require('endpoint');
@@ -26,13 +25,13 @@ var writes = [
 var EXPECTED_NO_COLOR = writes.map(function (item) {
   return (new Date(item.time)).toJSON().replace(/[A-Z]/, ' ').slice(0, -1) + '   ' +
          item.level + '\n' +
-         util.inspect(item.message);
+         item.message;
 });
 
 var EXPECTED_COLOR = writes.map(function (item) {
   return '\u001b[37m' + (new Date(item.time)).toJSON().replace(/[A-Z]/, ' ').slice(0, -1) + '\u001b[39m   ' +
          '\u001b[37m' + item.level + '\u001b[39m\n' +
-         '\u001b[32m' + util.inspect(item.message) + '\u001b[39m';
+         '\u001b[32m' + item.message + '\u001b[39m';
 });
 
 test('write 5 messages', function (t) {

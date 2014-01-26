@@ -1,8 +1,10 @@
 
-var daily = require('../daily.js');
-var color = require('cli-color');
-var stream = require('stream');
 var util = require('util');
+var stream = require('stream');
+var color = require('cli-color');
+var perceive = require('perceive');
+
+var daily = require('../daily.js');
 
 function toTime(input) {
   if (input === null) return null;
@@ -49,11 +51,11 @@ FormatStream.prototype._transform = function (log, encoding, done) {
   if (this.colors) {
     level = color.white(log.level);
     time = color.white(ms2str(log.time));
-    message = util.inspect(log.message, { colors: true, death: null });
+    message = perceive(log.message, { colors: true });
   } else {
     level = log.level;
     time = ms2str(log.time);
-    message = util.inspect(log.message, { colors: false, death: null });
+    message = perceive(log.message, { colors: false });
   }
 
   this.push(time + '   ' + level + '\n' + message + '\n');
