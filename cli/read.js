@@ -27,12 +27,27 @@ module.exports = function (argv) {
   var client = new daily.Client(port, ip);
   var reader = client.reader(start, end, levels);
 
-  reader.pipe( new FormatStream(process.stdout.isTTY || argv.colors) )
-        .pipe( process.stdout );
+  var output = reader.pipe( new FormatStream(process.stdout.isTTY || argv.colors) );
+      output.pipe( process.stdout );
 
-  reader.once('close', function () {
-    client.close();
+  // When pipeing to less and quitting, the pipe is broken and process.stdout
+  // will emit an error. Note this will usually happen before SIGPIPE is emitted.
+  // So the only way to detect this is to listen for an EPIPE error.
+  reader.once('close', closeClient);
+  process.once('SIGPIPE', closeClient);
+  process.stdout.on('error', function (err) {
+    if (err.errno === 'EPIPE') return closeClient();
+    throw err;
   });
+
+  var closeing = false;
+  function closeClient() {
+    if (closeing) return;
+    closeing = true;
+
+    output.unpipe(process.stdout);
+    client.close();
+  }
 };
 
 function FormatStream(colors) {
