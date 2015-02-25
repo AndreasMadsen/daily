@@ -41,7 +41,8 @@ test('write 5 messages', function (t) {
     client.log(item.level, item.message, item.time, done);
   }
 
-  async.each(writes, log, function () {
+  async.each(writes, log, function (err) {
+    t.ifError(err);
     client.once('close', t.end.bind(t));
     client.close();
   });

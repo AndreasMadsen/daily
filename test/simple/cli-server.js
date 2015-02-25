@@ -2,7 +2,7 @@
 var path = require('path');
 var test = require('tap').test;
 var async = require('async');
-var wrench = require('wrench');
+var rimraf = require('rimraf');
 var endpoint = require('endpoint');
 
 var exec = require('../exec.js');
@@ -28,7 +28,8 @@ test('write 3 messages', function (t) {
     client.log(item.level, item.message, item.time, done);
   }
 
-  async.each(writes, log, function () {
+  async.each(writes, log, function (err) {
+    t.ifError(err);
     client.once('close', t.end.bind(t));
     client.close();
   });
@@ -94,14 +95,14 @@ test('run cli server (short), no database, no address', function (t) {
       '  database : ' + path.resolve(__dirname, '../daily.db') + '\n' +
       'got SIGINT closeing daily server now\n'
     );
-    wrench.rmdirRecursive(path.resolve(__dirname, '../daily.db'), function () {
+    rimraf(path.resolve(__dirname, '../daily.db'), function () {
       t.end();
     });
   }));
 
   setTimeout(function () {
     child.kill('SIGINT');
-  }, 200);
+  }, 500);
 });
 
 test('run cli server (long), database set, address set', function (t) {

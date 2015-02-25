@@ -22,7 +22,7 @@ test('simultaniuse writes then read', function (t) {
     }
   }, function (err) {
     client.reader().pipe(endpoint({ objectMode: true }, function (err, logs) {
-      t.equal(err, null);
+      t.ifError(err);
       t.deepEqual(logs, [
         { time: LOG_TIME, level: 1, message: 'message - A' },
         { time: LOG_TIME, level: 1, message: 'message - B' }
@@ -47,7 +47,7 @@ test('simultaniuse writes and single read', function (t) {
       client.reader().pipe(endpoint({ objectMode: true }, done));
     }
   }, function (err, result) {
-    t.equal(err, null);
+    t.ifError(err);
 
     // The reason beind the read output contaning all logs, is properly
     // the fact that the read connection needs to be established first and
@@ -80,7 +80,7 @@ test('simultaniuse writes and multiply read', function (t) {
       client.reader().pipe(endpoint({ objectMode: true }, done));
     }
   }, function (err, result) {
-    t.equal(err, null);
+    t.ifError(err);
 
     // The reason beind the read output contaning all logs, is properly
     // the fact that the read connection needs to be established first and

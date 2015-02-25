@@ -30,7 +30,8 @@ test('write 3 messages', function (t) {
 
   LOG_TIME = Date.now();
 
-  async.each(Object.keys(writes), log, function () {
+  async.each(Object.keys(writes), log, function (err) {
+    t.ifError(err);
     client.once('close', t.end.bind(t));
     client.close();
   });

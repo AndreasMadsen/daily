@@ -25,13 +25,13 @@ test('close all connections then server', function (t) {
         });
       }
     }, function (err, clients) {
-      t.equal(err, null);
+      t.ifError(err);
 
       async.parallel({
         A: function (done) { clients.A.close(done); },
         B: function (done) { clients.B.close(done); }
       }, function (err) {
-        t.equal(err, null);
+        t.ifError(err);
 
         server.close(t.end.bind(t));
       });
@@ -68,7 +68,7 @@ test('close server with active connections', function (t) {
         });
       }
     }, function (err, clients) {
-      t.equal(err, null);
+      t.ifError(err);
 
       setTimeout(function() {
         async.parallel({
@@ -76,7 +76,7 @@ test('close server with active connections', function (t) {
           B: function (done) { closeWithErrorCatch(clients.B, done); },
           server: function (done) { server.close(done); }
         }, function (err, result) {
-          t.equal(err, null);
+          t.ifError(err);
           t.equal(result.A.message, 'socket closed unintentionally and reconnection failed');
           t.equal(result.B.message, 'socket closed unintentionally and reconnection failed');
           t.end();

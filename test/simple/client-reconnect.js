@@ -68,7 +68,7 @@ test('client can make a reconnection', function (t) {
           client.once('reconnect', done);
         }
       ], function (err) {
-        t.equal(err, null);
+        t.ifError(err);
 
         client.reader().pipe(endpoint({ objectMode: true }, function (err, logs) {
           t.equal(err, null);
